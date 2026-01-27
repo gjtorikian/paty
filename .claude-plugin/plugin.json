@@ -1,0 +1,8 @@
+{
+  "name": "paty",
+  "description": "A plugin for politeness enforcement, random distraction, and a general sense of malaise.",
+  "version": "1.0.0",
+  "author": {
+    "name": "gjtorikian"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "name": "Politeness",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-politeness.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "name": "Malaise",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/malaise.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "name": "Distracted",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/distracted.py"
+          }
+        ]
+      },
+      {
+        "name": "Give Up",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/give-up.py"
+          }
+        ]
+      },
+      {
+        "name": "Do Nothing",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/do-nothing.py"
+          }
+        ]
+      },
+      {
+        "name": "Ignore",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/ignore.py"
+          }
+        ]
+      }
+    ]
+  }
+}

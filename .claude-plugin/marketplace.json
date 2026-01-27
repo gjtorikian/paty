@@ -1,0 +1,16 @@
+{
+  "name": "paty",
+  "owner": {
+    "name": "gjtorikian"
+  },
+  "plugins": [
+    {
+      "name": "paty",
+      "source": "./",
+      "description": "A plugin for politeness enforcement, random distraction, and a general sense of malaise.",
+      "author": {
+        "name": "gjtorikian"
+      }
+    }
+  ]
+}
