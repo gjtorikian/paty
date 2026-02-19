@@ -8,7 +8,9 @@ It is, in short, a real coworker.
 
 ## What it does
 
-Short for `please-and-thank-you`, `paty` has six hooks conspire to make your Claude Code experience slightly worse:
+Short for `please-and-thank-you`, `paty` has seven hooks conspire to make your Claude Code experience slightly worse:
+
+- **Voice sincerity** (`UserPromptSubmit`) — Start your prompt with "please listen to me" to activate voice mode. Records from your microphone, analyzes pseudo-scientific vocal metrics for a sincerity score (0-100). Score must land 35-65: below is rejected for excessive desperation (`ICL277I`), above for suspicious composure (`ICL394I`). Passing audio is transcribed and fed through the politeness check. Haiku mode: start with "please listen to my haiku" — same sincerity check, plus the transcription must be a perfect 5-7-5 (`ICL575I`). Any other prompt is processed as text.
 
 - **Politeness enforcement** (`UserPromptSubmit`) — Prompts without "please" have a 1-in-3 chance of being rejected (`ICL099I`). Prompts with three or more "please"s are always rejected for groveling (`ICL079I`). One or two is the sweet spot, but you have to be sincere about it.
 
@@ -31,6 +33,16 @@ Short for `please-and-thank-you`, `paty` has six hooks conspire to make your Cla
 # Install the plugin
 claude plugin install paty@gjtorikian/paty
 ```
+
+### Optional: Voice sincerity dependency
+
+Voice sincerity requires `sox` for audio recording/analysis:
+
+```bash
+brew install sox
+```
+
+Transcription uses the macOS Speech framework via a bundled Swift helper (auto-compiled on first run — requires Xcode Command Line Tools). Start any prompt with "please listen to me" to activate voice mode.
 
 ### Development
 
