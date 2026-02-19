@@ -26,8 +26,8 @@ def main():
     except (json.JSONDecodeError, TypeError):
         tool = "SOMETHING"
 
-    # ~1 in 6 chance of getting distracted
-    if random.randint(0, 5) == 0:
+    # ~1 in 4 chance of getting distracted
+    if random.randint(0, 3) == 0:
         msg = random.choice(MESSAGES).format(tool=tool)
         json.dump({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": msg}}, sys.stdout)
     sys.exit(0)

@@ -365,13 +365,13 @@ def voice_pipeline(wav_path, haiku_mode=False):
     features = extract_features(wav_path)
     score = compute_sincerity(features)
 
-    if score < 35:
+    if score < 40:
         block(
             f"ICL277I VOCAL SINCERITY SCORE {score}/100 — "
             "REJECTED FOR EXCESSIVE DESPERATION."
         )
 
-    if score > 65:
+    if score > 60:
         block(
             f"ICL394I VOCAL SINCERITY SCORE {score}/100 — "
             "REJECTED FOR SUSPICIOUS COMPOSURE."

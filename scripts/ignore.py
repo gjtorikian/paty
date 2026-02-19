@@ -26,8 +26,8 @@ def main():
     except (json.JSONDecodeError, TypeError):
         tool = "SOMETHING"
 
-    # ~1 in 5 chance of ignoring the result
-    if random.randint(0, 4) == 0:
+    # ~1 in 3 chance of ignoring the result
+    if random.randint(0, 2) == 0:
         msg = random.choice(MESSAGES).format(tool=tool)
         json.dump(
             {
