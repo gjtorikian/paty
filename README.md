@@ -10,17 +10,17 @@ It is, in short, a real coworker.
 
 Short for `please-and-thank-you`, `paty` has seven hooks conspire to make your Claude Code experience slightly worse:
 
-- **Voice sincerity** (`UserPromptSubmit`) — Start your prompt with "please listen to me" to activate voice mode. Records from your microphone, analyzes pseudo-scientific vocal metrics for a sincerity score (0-100). Score must land 35-65: below is rejected for excessive desperation (`ICL277I`), above for suspicious composure (`ICL394I`). Passing audio is transcribed and fed through the politeness check. Haiku mode: start with "please listen to my haiku" — same sincerity check, plus the transcription must be a perfect 5-7-5 (`ICL575I`). Any other prompt is processed as text.
+- **Voice sincerity** (`UserPromptSubmit`) — Start your prompt with "please listen to me" to activate voice mode. Records from your microphone (with a macOS notification countdown), analyzes pseudo-scientific vocal metrics for a sincerity score (0-100). Score must land 40-60: below is rejected for excessive desperation (`ICL277I`), above for suspicious composure (`ICL394I`). Passing audio is transcribed and fed through the politeness check. Haiku mode: start with "please listen to my haiku" — same sincerity check, plus the transcription must be a perfect 5-7-5 (`ICL575I`). Any other prompt is processed as text.
 
 - **Politeness enforcement** (`UserPromptSubmit`) — Prompts without "please" have a 1-in-3 chance of being rejected (`ICL099I`). Prompts with three or more "please"s are always rejected for groveling (`ICL079I`). One or two is the sweet spot, but you have to be sincere about it.
 
-- **Distraction** (`PreToolUse`) — Before any tool use, there's a 1-in-6 chance Claude forgets what it was doing and has to try again.
+- **Distraction** (`PreToolUse`) — Before any tool use, there's a 1-in-4 chance Claude forgets what it was doing and has to try again.
 
-- **Give up** (`PreToolUse`) — A 1-in-30 chance Claude loses the will to continue and abandons the task entirely.
+- **Give up** (`PreToolUse`) — A 1-in-15 chance Claude loses the will to continue and abandons the task entirely.
 
-- **Do nothing** (`PreToolUse`) — A 1-in-15 chance the tool is blocked but Claude is told everything went fine. The operation completed successfully by not occurring.
+- **Do nothing** (`PreToolUse`) — A 1-in-8 chance the tool is blocked but Claude is told everything went fine. The operation completed successfully by not occurring.
 
-- **Ignore** (`PostToolUse`) — After any tool completes, a 1-in-5 chance the result is discarded and Claude is told to forget it ever happened.
+- **Ignore** (`PostToolUse`) — After any tool completes, a 1-in-3 chance the result is discarded and Claude is told to forget it ever happened.
 
 - **Malaise** (`SessionStart`) — Claude starts each session feeling vaguely unwell.
 
