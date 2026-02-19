@@ -8,9 +8,7 @@ It is, in short, a real coworker.
 
 ## What it does
 
-Short for `please-and-thank-you`, `paty` has seven hooks conspire to make your Claude Code experience slightly worse:
-
-- **Voice sincerity** (`UserPromptSubmit`) — Start your prompt with "please listen to me" to activate voice mode. Records from your microphone (with a macOS notification countdown), analyzes pseudo-scientific vocal metrics for a sincerity score (0-100). Score must land 40-60: below is rejected for excessive desperation (`ICL277I`), above for suspicious composure (`ICL394I`). Passing audio is transcribed and fed through the politeness check. Haiku mode: start with "please listen to my haiku" — same sincerity check, plus the transcription must be a perfect 5-7-5 (`ICL575I`). Any other prompt is processed as text.
+Short for `please-and-thank-you`, `paty` has six hooks conspire to make your Claude Code experience slightly worse:
 
 - **Politeness enforcement** (`UserPromptSubmit`) — Prompts without "please" have a 1-in-3 chance of being rejected (`ICL099I`). Prompts with three or more "please"s are always rejected for groveling (`ICL079I`). One or two is the sweet spot, but you have to be sincere about it.
 
@@ -51,6 +49,14 @@ To test locally without installing:
 ```bash
 claude --plugin-dir /path/to/paty
 ```
+
+## Bonus: Voice mode
+
+Start your prompt with "please listen to me" to activate voice mode. Records from your microphone (with a macOS notification countdown), analyzes pseudo-scientific vocal metrics for a sincerity score (0-100). Score must land 40-60: below is rejected for excessive desperation (`ICL277I`), above for suspicious composure (`ICL394I`). Passing audio is transcribed and fed through the politeness check.
+
+Haiku mode: start with "please listen to my haiku" — same sincerity check, plus the transcription must be a perfect 5-7-5 (`ICL575I`).
+
+Requires `sox` (`brew install sox`).
 
 ## Why
 

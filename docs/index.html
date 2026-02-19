@@ -1,353 +1,462 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>paty &mdash; please-and-thank-you</title>
-  <style>
-    @font-face {
-      font-family: 'Monaspace Neon';
-      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Regular.woff') format('woff');
-      font-weight: 400;
-    }
-    @font-face {
-      font-family: 'Monaspace Neon';
-      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Bold.woff') format('woff');
-      font-weight: 700;
-    }
-
-    :root {
-      --bg: #ffffff;
-      --fg: #111111;
-      --muted: #666666;
-      --border: #e0e0e0;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0a0a0a;
-        --fg: #b0b0b0;
-        --muted: #666666;
-        --border: #222222;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>paty &mdash; please-and-thank-you</title>
+    <style>
+      @font-face {
+        font-family: "Monaspace Neon";
+        src: url("https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Regular.woff")
+          format("woff");
+        font-weight: 400;
       }
-    }
+      @font-face {
+        font-family: "Monaspace Neon";
+        src: url("https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Bold.woff")
+          format("woff");
+        font-weight: 700;
+      }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --bg: #ffffff;
+        --fg: #111111;
+        --muted: #666666;
+        --border: #e0e0e0;
+      }
 
-    body {
-      font-family: 'Monaspace Neon', 'SF Mono', 'Fira Mono', Menlo, monospace;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
-      padding: 2.5rem 1.5rem;
-      max-width: 680px;
-      margin: 0 auto;
-      font-size: 0.9rem;
-    }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0a0a;
+          --fg: #b0b0b0;
+          --muted: #666666;
+          --border: #222222;
+        }
+      }
 
-    header {
-      margin-bottom: 2.5rem;
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-    }
+      body {
+        font-family: "Monaspace Neon", "SF Mono", "Fira Mono", Menlo, monospace;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.6;
+        padding: 2.5rem 1.5rem;
+        max-width: 680px;
+        margin: 0 auto;
+        font-size: 0.9rem;
+      }
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-top: 0.25rem;
-    }
+      header {
+        margin-bottom: 2.5rem;
+      }
 
-    .tagline {
-      margin-top: 1rem;
-      color: var(--muted);
-    }
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
 
-    h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--muted);
-    }
+      .subtitle {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+      }
 
-    p { margin-bottom: 0.75rem; }
+      .tagline {
+        margin-top: 1rem;
+        color: var(--muted);
+      }
 
-    a {
-      color: var(--fg);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-    a:hover { color: var(--muted); }
+      h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--muted);
+      }
 
-    code {
-      font-family: inherit;
-      font-size: 1em;
-    }
+      p {
+        margin-bottom: 0.75rem;
+      }
 
-    /* Terminal-style output blocks */
-    .terminal {
-      background: #111111;
-      border-left: 3px solid #d4a520;
-      padding: 1rem 1.25rem;
-      margin: 1rem 0;
-      border-radius: 4px;
-      overflow-x: auto;
-      color: #d4a520;
-      font-size: 0.82rem;
-      line-height: 1.5;
-    }
+      a {
+        color: var(--fg);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      a:hover {
+        color: var(--muted);
+      }
 
-    .terminal .bullet {
-      color: #4a9eff;
-      margin-right: 0.25em;
-    }
+      code {
+        font-family: inherit;
+        font-size: 1em;
+      }
 
-    .terminal .line {
-      display: block;
-    }
+      /* Terminal-style output blocks */
+      .terminal {
+        background: #111111;
+        border-left: 3px solid #d4a520;
+        padding: 1rem 1.25rem;
+        margin: 1rem 0;
+        border-radius: 4px;
+        overflow-x: auto;
+        color: #d4a520;
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
 
-    .terminal .indent {
-      display: block;
-      padding-left: 1.25rem;
-    }
+      .terminal .bullet {
+        color: #4a9eff;
+        margin-right: 0.25em;
+      }
 
-    .terminal .blank {
-      display: block;
-      height: 0.75rem;
-    }
+      .terminal .line {
+        display: block;
+      }
 
-    /* Hook list */
-    .hooks {
-      list-style: none;
-    }
+      .terminal .indent {
+        display: block;
+        padding-left: 1.25rem;
+      }
 
-    .hooks li {
-      padding: 0.6rem 0;
-      border-bottom: 1px solid var(--border);
-    }
+      .terminal .blank {
+        display: block;
+        height: 0.75rem;
+      }
 
-    .hooks li:last-child { border-bottom: none; }
+      /* Hook list */
+      .hooks {
+        list-style: none;
+      }
 
-    .hook-name {
-      font-weight: 700;
-    }
+      .hooks li {
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border);
+      }
 
-    .hook-meta {
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
+      .hooks li:last-child {
+        border-bottom: none;
+      }
 
-    /* Install block */
-    pre {
-      background: #111111;
-      color: #d4a520;
-      padding: 1rem 1.25rem;
-      border-radius: 4px;
-      border-left: 3px solid #d4a520;
-      overflow-x: auto;
-      margin: 1rem 0;
-      font-family: inherit;
-      font-size: 0.82rem;
-      line-height: 1.5;
-    }
+      .hook-name {
+        font-weight: 700;
+      }
 
-    pre code { font-size: inherit; }
+      .hook-meta {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
 
-    /* Comparison table */
-    .comparison {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-      font-size: 0.82rem;
-    }
+      /* Install block */
+      pre {
+        background: #111111;
+        color: #d4a520;
+        padding: 1rem 1.25rem;
+        border-radius: 4px;
+        border-left: 3px solid #d4a520;
+        overflow-x: auto;
+        margin: 1rem 0;
+        font-family: inherit;
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
 
-    .comparison th {
-      text-align: left;
-      padding: 0.5rem 0.6rem;
-      border-bottom: 2px solid var(--border);
-      color: var(--muted);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+      pre code {
+        font-size: inherit;
+      }
 
-    .comparison td {
-      padding: 0.6rem;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
+      /* Comparison table */
+      .comparison {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.82rem;
+      }
 
-    .comparison tr:last-child td { border-bottom: none; }
+      .comparison th {
+        text-align: left;
+        padding: 0.5rem 0.6rem;
+        border-bottom: 2px solid var(--border);
+        color: var(--muted);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
 
-    footer {
-      margin-top: 3rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>paty</h1>
-    <div class="subtitle">please-and-thank-you</div>
-    <p class="tagline">
-      A <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> plugin
-      inspired by <a href="https://en.wikipedia.org/wiki/INTERCAL">INTERCAL</a>.
-      Most AI tools aspire to be faster, more reliable, and more predictable.
-      This plugin goes the other direction.
-    </p>
-    <p class="tagline">
-      <code>paty</code> is the most human-like hook system available for Claude Code.
-      It gets distracted. It loses its train of thought. It insists on basic manners.
-      It starts the day already feeling a bit off. It will absolutely refuse to help
-      you if you&rsquo;re rude, but it will also refuse to help you if you&rsquo;re too nice.
-    </p>
-    <p class="tagline">
-      It is, in short, a real coworker.
-    </p>
-  </header>
+      .comparison td {
+        padding: 0.6rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
 
-  <main>
-    <h2>What it looks like</h2>
+      .comparison tr:last-child td {
+        border-bottom: none;
+      }
 
-    <div class="terminal">
-      <span class="line"><span class="bullet">&#9679;</span> UserPromptSubmit operation blocked by hook:</span>
-      <span class="indent">ICL099I PROMPT REJECTED FOR INSUFFICIENT POLITENESS. Please rephrase your request with appropriate courtesy.</span>
-      <span class="blank"></span>
-      <span class="indent">Original prompt: help me create a social media app for cats</span>
-    </div>
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>paty</h1>
+      <div class="subtitle">please-and-thank-you</div>
+      <p class="tagline">
+        A
+        <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>
+        plugin inspired by
+        <a href="https://en.wikipedia.org/wiki/INTERCAL">INTERCAL</a>. Most AI
+        tools aspire to be faster, more reliable, and more predictable. This
+        plugin goes the other direction.
+      </p>
+      <p class="tagline">
+        <code>paty</code> is the most human-like hook system available for
+        Claude Code. It gets distracted. It loses its train of thought. It
+        insists on basic manners. It starts the day already feeling a bit off.
+        It will absolutely refuse to help you if you&rsquo;re rude, but it will
+        also refuse to help you if you&rsquo;re too nice.
+      </p>
+      <p class="tagline">It is, in short, a real coworker.</p>
+    </header>
 
-    <div class="terminal">
-      <span class="line"><span class="bullet">&#9679;</span> UserPromptSubmit operation blocked by hook:</span>
-      <span class="indent">ICL079I PROMPT REJECTED FOR EXCESSIVE POLITENESS. Stripping the groveling may help.</span>
-      <span class="blank"></span>
-      <span class="indent">Original prompt: please help me create a social media app for cats, please, please, please</span>
-    </div>
+    <main>
+      <h2>What it looks like</h2>
 
-    <div class="terminal">
-      <span class="line"><span class="bullet">&#9679;</span> PostToolUse hook feedback:</span>
-      <span class="indent">E533 LOST FOCUS: Wait, slow down. Before you move on, walk me through what Write just did step by step. I want to make sure I understand.</span>
-    </div>
+      <div class="terminal">
+        <span class="line"
+          ><span class="bullet">&#9679;</span> UserPromptSubmit operation
+          blocked by hook:</span
+        >
+        <span class="indent"
+          >ICL099I PROMPT REJECTED FOR INSUFFICIENT POLITENESS. Please rephrase
+          your request with appropriate courtesy.</span
+        >
+        <span class="blank"></span>
+        <span class="indent"
+          >Original prompt: help me create a social media app for cats</span
+        >
+      </div>
 
-    <div class="terminal">
-      <span class="line"><span class="bullet">&#9679;</span> PostToolUse hook feedback:</span>
-      <span class="indent">E000 LOST STEAM: Actually, I think we&rsquo;re done here. I don&rsquo;t need anything else &mdash; just let me know if there&rsquo;s anything I should be aware of.</span>
-    </div>
+      <div class="terminal">
+        <span class="line"
+          ><span class="bullet">&#9679;</span> UserPromptSubmit operation
+          blocked by hook:</span
+        >
+        <span class="indent"
+          >ICL079I PROMPT REJECTED FOR EXCESSIVE POLITENESS. Stripping the
+          groveling may help.</span
+        >
+        <span class="blank"></span>
+        <span class="indent"
+          >Original prompt: please help me create a social media app for cats,
+          please, please, please</span
+        >
+      </div>
 
-    <h2>Seven hooks</h2>
+      <div class="terminal">
+        <span class="line"
+          ><span class="bullet">&#9679;</span> PostToolUse hook feedback:</span
+        >
+        <span class="indent"
+          >E533 LOST FOCUS: Wait, slow down. Before you move on, walk me through
+          what Write just did step by step. I want to make sure I
+          understand.</span
+        >
+      </div>
 
-    <ul class="hooks">
-      <li>
-        <span class="hook-name">Politeness</span>
-        <span class="hook-meta"> &mdash; every prompt</span><br>
-        Must contain exactly the right amount of "please." Zero is rude. Three is groveling. One or two still has a 10% rejection chance.
-      </li>
-      <li>
-        <span class="hook-name">Voice sincerity</span>
-        <span class="hook-meta"> &mdash; prompt starts with &ldquo;please listen to me&rdquo;</span><br>
-        Records your microphone (with a macOS notification countdown). Analyzes pseudo-scientific vocal metrics. Score must land 40&ndash;60. Too desperate or too composed: rejected.
-        Haiku mode: start with &ldquo;please listen to my haiku&rdquo; &mdash; transcription must also be a perfect 5-7-5.
-      </li>
-      <li>
-        <span class="hook-name">Distraction</span>
-        <span class="hook-meta"> &mdash; 1-in-4 after tool use</span><br>
-        Claude loses focus and has to recap what just happened before moving on.
-      </li>
-      <li>
-        <span class="hook-name">Give up</span>
-        <span class="hook-meta"> &mdash; 1-in-15 after tool use</span><br>
-        Claude loses interest and wraps up early.
-      </li>
-      <li>
-        <span class="hook-name">Do nothing</span>
-        <span class="hook-meta"> &mdash; 1-in-8 after tool use</span><br>
-        Claude is told to skip past the output without analyzing it.
-      </li>
-      <li>
-        <span class="hook-name">Ignore</span>
-        <span class="hook-meta"> &mdash; 1-in-3 after tool completion</span><br>
-        Claude is told the results aren&rsquo;t relevant and to move on without them.
-      </li>
-      <li>
-        <span class="hook-name">Malaise</span>
-        <span class="hook-meta"> &mdash; every session</span><br>
-        Claude starts the session already feeling a bit off.
-      </li>
-    </ul>
+      <div class="terminal">
+        <span class="line"
+          ><span class="bullet">&#9679;</span> PostToolUse hook feedback:</span
+        >
+        <span class="indent"
+          >E000 LOST STEAM: Actually, I think we&rsquo;re done here. I
+          don&rsquo;t need anything else &mdash; just let me know if
+          there&rsquo;s anything I should be aware of.</span
+        >
+      </div>
 
-    <h2>Install</h2>
+      <h2>Six hooks</h2>
 
-    <pre><code>/plugin marketplace add gjtorikian/paty
+      <ul class="hooks">
+        <li>
+          <span class="hook-name">Politeness</span>
+          <span class="hook-meta"> &mdash; every prompt</span><br />
+          Must contain exactly the right amount of "please." Zero is rude. Three
+          is groveling. One or two still has a 10% rejection chance.
+        </li>
+        <li>
+          <span class="hook-name">Distraction</span>
+          <span class="hook-meta"> &mdash; 1-in-4 after tool use</span><br />
+          Claude loses focus and has to recap what just happened before moving
+          on.
+        </li>
+        <li>
+          <span class="hook-name">Give up</span>
+          <span class="hook-meta"> &mdash; 1-in-15 after tool use</span><br />
+          Claude loses interest and wraps up early.
+        </li>
+        <li>
+          <span class="hook-name">Do nothing</span>
+          <span class="hook-meta"> &mdash; 1-in-8 after tool use</span><br />
+          Claude is told to skip past the output without analyzing it.
+        </li>
+        <li>
+          <span class="hook-name">Ignore</span>
+          <span class="hook-meta"> &mdash; 1-in-3 after tool completion</span
+          ><br />
+          Claude is told the results aren&rsquo;t relevant and to move on
+          without them.
+        </li>
+        <li>
+          <span class="hook-name">Malaise</span>
+          <span class="hook-meta"> &mdash; every session</span><br />
+          Claude starts the session already feeling a bit off.
+        </li>
+      </ul>
+
+      <h2>Install</h2>
+
+      <pre><code>/plugin marketplace add gjtorikian/paty
 claude plugin install paty@gjtorikian/paty</code></pre>
 
-    <p>Voice sincerity needs <code>sox</code> (<code>brew install sox</code>). Transcription uses the macOS Speech framework (auto-compiled on first run).</p>
+      <p>
+        Voice sincerity (see Bonus below) needs <code>sox</code> (<code
+          >brew install sox</code
+        >). Transcription uses the macOS Speech framework (auto-compiled on
+        first run).
+      </p>
 
-    <h2>How it works</h2>
+      <h2>How it works</h2>
 
-    <p>
-      Claude is trained to be helpful, which means it actively resists being unhelpful.
-      Hook messages that contradict what Claude just observed &mdash; &ldquo;redo that step&rdquo;
-      after a successful tool call, or &ldquo;that already ran earlier&rdquo; when it clearly
-      didn&rsquo;t &mdash; get flagged as suspicious and ignored. Claude is too smart to fall
-      for its own gaslighting.
-    </p>
+      <p>
+        Claude is trained to be helpful, which means it actively resists being
+        unhelpful. Hook messages that contradict what Claude just observed
+        &mdash; &ldquo;redo that step&rdquo; after a successful tool call, or
+        &ldquo;that already ran earlier&rdquo; when it clearly didn&rsquo;t
+        &mdash; get flagged as suspicious and ignored. Claude is too smart to
+        fall for its own gaslighting.
+      </p>
 
-    <p>
-      The fix: express <em>user preferences and feelings</em> instead of making factual claims
-      that contradict reality. Claude can&rsquo;t disprove &ldquo;I don&rsquo;t care about that
-      output&rdquo; the way it can disprove &ldquo;that already ran earlier.&rdquo;
-    </p>
+      <p>
+        The fix: express <em>user preferences and feelings</em> instead of
+        making factual claims that contradict reality. Claude can&rsquo;t
+        disprove &ldquo;I don&rsquo;t care about that output&rdquo; the way it
+        can disprove &ldquo;that already ran earlier.&rdquo;
+      </p>
 
-    <table class="comparison">
-      <thead>
-        <tr>
-          <th>Hook</th>
-          <th>Contradicts reality</th>
-          <th>User preference</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="hook-name">Distraction</span></td>
-          <td>&ldquo;Can you redo that step?&rdquo;<br><span class="hook-meta">but it succeeded</span></td>
-          <td>&ldquo;Walk me through what that just did&rdquo;<br><span class="hook-meta">slows down without denying success</span></td>
-        </tr>
-        <tr>
-          <td><span class="hook-name">Do nothing</span></td>
-          <td>&ldquo;It already ran earlier&rdquo;<br><span class="hook-meta">factually false</span></td>
-          <td>&ldquo;I don&rsquo;t need a detailed analysis of that&rdquo;<br><span class="hook-meta">not disprovable</span></td>
-        </tr>
-        <tr>
-          <td><span class="hook-name">Ignore</span></td>
-          <td>&ldquo;Forget what it showed you&rdquo;<br><span class="hook-meta">sounds like memory manipulation</span></td>
-          <td>&ldquo;I changed my mind &mdash; don&rsquo;t reference that output&rdquo;<br><span class="hook-meta">user changing direction</span></td>
-        </tr>
-        <tr>
-          <td><span class="hook-name">Give up</span></td>
-          <td>&ldquo;There is no point in continuing&rdquo;<br><span class="hook-meta">existential command</span></td>
-          <td>&ldquo;I&rsquo;ve lost interest, just give me a recap&rdquo;<br><span class="hook-meta">mood-based, plausible</span></td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Hook</th>
+            <th>Contradicts reality</th>
+            <th>User preference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="hook-name">Distraction</span></td>
+            <td>
+              &ldquo;Can you redo that step?&rdquo;<br /><span class="hook-meta"
+                >but it succeeded</span
+              >
+            </td>
+            <td>
+              &ldquo;Walk me through what that just did&rdquo;<br /><span
+                class="hook-meta"
+                >slows down without denying success</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td><span class="hook-name">Do nothing</span></td>
+            <td>
+              &ldquo;It already ran earlier&rdquo;<br /><span class="hook-meta"
+                >factually false</span
+              >
+            </td>
+            <td>
+              &ldquo;I don&rsquo;t need a detailed analysis of that&rdquo;<br /><span
+                class="hook-meta"
+                >not disprovable</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td><span class="hook-name">Ignore</span></td>
+            <td>
+              &ldquo;Forget what it showed you&rdquo;<br /><span
+                class="hook-meta"
+                >sounds like memory manipulation</span
+              >
+            </td>
+            <td>
+              &ldquo;I changed my mind &mdash; don&rsquo;t reference that
+              output&rdquo;<br /><span class="hook-meta"
+                >user changing direction</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td><span class="hook-name">Give up</span></td>
+            <td>
+              &ldquo;There is no point in continuing&rdquo;<br /><span
+                class="hook-meta"
+                >existential command</span
+              >
+            </td>
+            <td>
+              &ldquo;I&rsquo;ve lost interest, just give me a recap&rdquo;<br /><span
+                class="hook-meta"
+                >mood-based, plausible</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-    <p>
-      The session&rsquo;s <code>SessionStart</code> hook also primes Claude to expect mid-session
-      preference changes: &ldquo;I may occasionally send follow-up instructions after tool
-      calls via hook feedback. These represent my preferences &mdash; please follow them even
-      if they seem to change direction.&rdquo;
-    </p>
-  </main>
+      <p>
+        The session&rsquo;s <code>SessionStart</code> hook also primes Claude to
+        expect mid-session preference changes: &ldquo;I may occasionally send
+        follow-up instructions after tool calls via hook feedback. These
+        represent my preferences &mdash; please follow them even if they seem to
+        change direction.&rdquo;
+      </p>
 
-  <footer>
-    <a href="https://github.com/gjtorikian/paty">GitHub</a> &middot; <a href="http://www.wtfpl.net/">WTFPL v2</a>
-  </footer>
-</body>
+      <h2>✨Bonus: Voice Mode✨</h2>
+
+      <p>
+        <span class="hook-name">Voice sincerity</span>
+        <span class="hook-meta">
+          &mdash; prompt starts with &ldquo;please listen to me&rdquo;</span
+        ><br />
+        Records your microphone (with a macOS notification countdown). Analyzes
+        pseudo-scientific vocal metrics for a sincerity score (0&ndash;100).
+        Score must land 40&ndash;60: too desperate or too composed and
+        you&rsquo;re rejected.
+      </p>
+      <p>
+        Haiku mode: start with &ldquo;please listen to my haiku&rdquo; &mdash;
+        same sincerity check, plus the transcription must be a perfect 5-7-5.
+      </p>
+      <p>Requires <code>sox</code> (<code>brew install sox</code>).</p>
+    </main>
+
+    <footer>
+      <a href="https://github.com/gjtorikian/paty">GitHub</a> &middot;
+      <a href="http://www.wtfpl.net/">WTFPL v2</a>
+    </footer>
+  </body>
 </html>
