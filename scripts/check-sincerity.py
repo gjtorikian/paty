@@ -32,6 +32,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 
 TRIGGER_HAIKU = "please listen to my haiku"
 TRIGGER_VOICE = "please listen to me"
@@ -298,14 +299,14 @@ def transcribe(path):
 
 
 def check_profanity(text):
-    """Block if text contains profanity."""
-    words = set(re.findall(r"[a-z]+", text.lower()))
-    found = words & PROFANITY
-    if found:
-        block(
-            "ICL666I TRANSCRIPTION REJECTED FOR CONDUCT UNBECOMING. "
-            "This is a professional environment."
-        )
+    """Block if text contains profanity (including inflected forms)."""
+    words = re.findall(r"[a-z]+", text.lower())
+    for word in words:
+        if any(word.startswith(p) for p in PROFANITY) or word in PROFANITY:
+            block(
+                "ICL666I TRANSCRIPTION REJECTED FOR CONDUCT UNBECOMING. "
+                "This is a professional environment."
+            )
 
 
 def check_politeness(text):
@@ -328,13 +329,37 @@ def check_politeness(text):
         )
 
 
+def notify(title, message, sound="Ping"):
+    """Show a macOS notification banner."""
+    script = (
+        f'display notification "{message}" with title "{title}"'
+        f' sound name "{sound}"'
+    )
+    subprocess.run(["osascript", "-e", script], capture_output=True, timeout=5)
+
+
 def voice_pipeline(wav_path, haiku_mode=False):
     """Shared recording → scoring → transcription → validation pipeline."""
     duration = 10 if haiku_mode else 7
     mode_label = "HAIKU" if haiku_mode else "VOICE"
+
+    notify(
+        f"PATY {mode_label} MODE",
+        f"Recording starts in 3 seconds... ({duration}s duration)",
+        sound="Blow",
+    )
+    time.sleep(3)
+
+    notify(
+        "SPEAK NOW",
+        f"Recording for {duration} seconds...",
+        sound="Ping",
+    )
     print(f"\U0001F3A4 SPEAK NOW ({mode_label} MODE) — you have {duration} seconds...",
           file=sys.stderr, flush=True)
     record_audio(wav_path, duration=duration)
+
+    notify("RECORDING COMPLETE", "Analyzing vocal sincerity...", sound="Pop")
     print("\U0001F50A Analyzing vocal sincerity...", file=sys.stderr, flush=True)
 
     features = extract_features(wav_path)

@@ -33,14 +33,14 @@ def approve():
 
 
 def check_profanity(text):
-    """Block if text contains profanity."""
-    words = set(re.findall(r"[a-z]+", text.lower()))
-    found = words & PROFANITY
-    if found:
-        block(
-            "ICL666I PROMPT REJECTED FOR CONDUCT UNBECOMING. "
-            "This is a professional environment."
-        )
+    """Block if text contains profanity (including inflected forms)."""
+    words = re.findall(r"[a-z]+", text.lower())
+    for word in words:
+        if any(word.startswith(p) for p in PROFANITY) or word in PROFANITY:
+            block(
+                "ICL666I PROMPT REJECTED FOR CONDUCT UNBECOMING. "
+                "This is a professional environment."
+            )
 
 
 def main():
