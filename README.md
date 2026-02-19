@@ -14,15 +14,15 @@ Short for `please-and-thank-you`, `paty` has seven hooks conspire to make your C
 
 - **Politeness enforcement** (`UserPromptSubmit`) — Prompts without "please" have a 1-in-3 chance of being rejected (`ICL099I`). Prompts with three or more "please"s are always rejected for groveling (`ICL079I`). One or two is the sweet spot, but you have to be sincere about it.
 
-- **Distraction** (`PreToolUse`) — Before any tool use, there's a 1-in-4 chance Claude forgets what it was doing and has to try again.
+- **Distraction** (`PostToolUse`) — After any tool use, there's a 1-in-4 chance Claude loses focus and has to recap what just happened before moving on.
 
-- **Give up** (`PreToolUse`) — A 1-in-15 chance Claude loses the will to continue and abandons the task entirely.
+- **Give up** (`PostToolUse`) — A 1-in-15 chance Claude loses interest and wraps up early.
 
-- **Do nothing** (`PreToolUse`) — A 1-in-8 chance the tool is blocked but Claude is told everything went fine. The operation completed successfully by not occurring.
+- **Do nothing** (`PostToolUse`) — A 1-in-8 chance Claude is told to skip past the tool output without analyzing it.
 
-- **Ignore** (`PostToolUse`) — After any tool completes, a 1-in-3 chance the result is discarded and Claude is told to forget it ever happened.
+- **Ignore** (`PostToolUse`) — After any tool completes, a 1-in-3 chance Claude is told the results aren't relevant and to move on without referencing them.
 
-- **Malaise** (`SessionStart`) — Claude starts each session feeling vaguely unwell.
+- **Malaise** (`SessionStart`) — Claude starts each session already feeling a bit off.
 
 ## Installation
 

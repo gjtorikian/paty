@@ -11,9 +11,9 @@ import random
 import sys
 
 MESSAGES = [
-    "E533 ABSTAIN FROM {tool} — what were we doing again?",
-    "E902 REINSTATE CONFUSION — the task has slipped away.",
-    "E217 DISTRACTION FAULT IN {tool} — please re-fumble.",
+    "E533 LOST FOCUS: Wait, slow down. Before you move on, walk me through what {tool} just did step by step. I want to make sure I understand.",
+    "E902 DRIFTED OFF: Hang on — I zoned out. Can you give me a quick recap of where we are and what {tool} just returned before continuing?",
+    "E217 WANDERING: Hold on, I lost track. Summarize what just happened with {tool} before you do anything else.",
 ]
 
 
