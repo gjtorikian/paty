@@ -2,6 +2,16 @@
   "hooks": {
     "UserPromptSubmit": [
       {
+        "name": "Voice Sincerity",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-sincerity.py",
+            "timeout": 30
+          }
+        ]
+      },
+      {
         "name": "Politeness",
         "hooks": [
           {

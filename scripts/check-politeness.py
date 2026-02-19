@@ -12,8 +12,15 @@ This hook checks each user prompt for "please" (case-insensitive).
 """
 
 import json
+import re
 import random
 import sys
+
+PROFANITY = {
+    "fuck", "shit", "damn", "ass", "bitch", "bastard", "crap", "dick",
+    "hell", "piss", "cock", "cunt", "bollocks", "bugger", "bloody",
+    "wanker", "twat", "arse", "tosser", "sod",
+}
 
 
 def block(reason):
@@ -23,6 +30,17 @@ def block(reason):
 
 def approve():
     sys.exit(0)
+
+
+def check_profanity(text):
+    """Block if text contains profanity."""
+    words = set(re.findall(r"[a-z]+", text.lower()))
+    found = words & PROFANITY
+    if found:
+        block(
+            "ICL666I PROMPT REJECTED FOR CONDUCT UNBECOMING. "
+            "This is a professional environment."
+        )
 
 
 def main():
@@ -38,6 +56,10 @@ def main():
         prompt = raw
 
     prompt_lower = str(prompt).lower()
+
+    # ICL666I: profanity check — always reject
+    check_profanity(prompt_lower)
+
     please_count = prompt_lower.count("please")
 
     # ICL079I: too many PLEASEs — groveling
